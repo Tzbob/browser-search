@@ -3,6 +3,9 @@ indexer = require "../src/indexer"
 
 describe "indexer", ->
 
+  # index()
+  # ###########################################################################
+
   doubleOne = "This is one one one one small test"
   one = "This is one small test"
   two = "This is one small test again"
@@ -30,9 +33,6 @@ describe "indexer", ->
       , "TST"
       , "AKN"
     ]
-
-  # index()
-  # ###########################################################################
 
   describe "#index()", ->
     it "should error out on something that isn't an object", ->
