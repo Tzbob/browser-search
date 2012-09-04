@@ -31,6 +31,9 @@ describe "indexer", ->
       , "AKN"
     ]
 
+  # index()
+  # ###########################################################################
+
   describe "#index()", ->
     it "should error out on something that isn't an object", ->
       assert.throws ->
@@ -40,13 +43,13 @@ describe "indexer", ->
       test = indexer.index
         one: one
         two: two
-      assert.deepEqual test, result
+      assert.deepEqual test.data, result
 
     it "should return an indexed object without doubles", ->
       test = indexer.index
         one: doubleOne
         two: two
-      assert.deepEqual test, result
+      assert.deepEqual test.data, result
 
 
     it "should create an indexed object using just one property", ->
@@ -56,7 +59,18 @@ describe "indexer", ->
         two:
           text: two
       , "text"
-      assert.deepEqual test, result
+      assert.deepEqual test.data, result
+
+    it "should find both documents when searching for This", ->
+      test = indexer.index
+        one:
+          text: one
+        two:
+          text: two
+      , "text"
+      result = test.query "This"
+
+      assert.deepEqual result, ["one", "two"]
 
     it "should create an indexed object using multiple properties", ->
       test = indexer.index
@@ -64,4 +78,49 @@ describe "indexer", ->
           textOne: one
           textTwo: two
       , ["textOne", "textTwo"]
-      assert.deepEqual test, altResult
+      assert.deepEqual test.data, altResult
+
+  # indexFile()
+  # ###########################################################################
+
+  testFile = "./test/articles/benchmarker"
+  fileResult =
+    benchmarker: [
+      'JF',
+      'BNKSHMRKNK',
+      'SNKLTN',
+      'AN',
+      'ES',
+      'US',
+      'TMNK',
+      'KLS',
+      'PSBL',
+      'IMPRFMNTS',
+      'KRT',
+      'BNKSHMRK',
+      'PRFTR',
+      'SFRL',
+      'UNK',
+      'INSTNSS'
+    ]
+
+  describe "#indexFile()", ->
+    it "should process file title/info with extension", (done) ->
+      indexer.indexFile testFile+".json", ["title", "info"], (contents) ->
+        assert.deepEqual contents.data, fileResult
+        done()
+
+    it "should query processed file title/info without extension", (done) ->
+      indexer.indexFile testFile+".json", ["title", "info"], (contents) ->
+        assert.deepEqual contents.query("benchmark"), ["benchmarker"]
+        done()
+
+    it "should process file title/info without extension", (done) ->
+      indexer.indexFile testFile, ["title", "info"], (contents) ->
+        assert.deepEqual contents.data, fileResult
+        done()
+
+    it "should query processed file title/info without extension", (done) ->
+      indexer.indexFile testFile, ["title", "info"], (contents) ->
+        assert.deepEqual contents.query("benchmark"), ["benchmarker"]
+        done()

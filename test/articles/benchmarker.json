@@ -1,0 +1,9 @@
+{
+  "title": "Java - Benchmarking Singleton"
+  , "info": "An easy to use timing singleton class. Possible improvements: create a singleton benchmark provider to provider several unique benchmark instances."
+  , "references": [
+    "http://stackoverflow.com/questions/3853185/java-double-formatting-question-for-printf"
+    , "http://en.wikipedia.org/wiki/Singleton_pattern"
+    , "http://stackoverflow.com/questions/351565/system-currenttimemillis-vs-system-nanotime"
+  ]
+}
