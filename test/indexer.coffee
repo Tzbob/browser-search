@@ -110,7 +110,7 @@ describe "indexer", ->
         assert.deepEqual contents.data, fileResult
         done()
 
-    it "should query processed file title/info without extension", (done) ->
+    it "should query processed file title/info with extension", (done) ->
       indexer.indexFile testFile+".json", ["title", "info"], (contents) ->
         assert.deepEqual contents.query("benchmark"), ["benchmarker"]
         done()
