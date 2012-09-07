@@ -1,5 +1,6 @@
 assert = require "assert"
 indexer = require "../src/indexer"
+fs = require "fs"
 
 describe "indexer", ->
 
@@ -124,3 +125,28 @@ describe "indexer", ->
       indexer.indexFile testFile, ["title", "info"], (contents) ->
         assert.deepEqual contents.query("benchmark"), ["benchmarker"]
         done()
+
+  # save()
+  # ###########################################################################
+ 
+  test = indexer.index
+    one: one
+    two: two
+
+  testResultFile = "./test/articles/indexed/benchmarker.json"
+  testCorrectFile = "./test/articles/indexed/benchmarker.json"
+
+  describe "#save()", ->
+    it "should error out when you try to save a non-Index", ->
+      assert.throws ->
+        indexer.save "rawtext"
+
+    it "should save the indexed data", (done) ->
+      indexer.save test, testResultFile, (stringified) ->
+        fs.readFile testCorrectFile, "utf-8", (err, data) ->
+          throw err if err?
+          fs.readFile testResultFile, "utf-8", (err, processedData) ->
+            throw err if err?
+            assert.equal data, processedData
+            fs.unlinkSync testResultFile
+            done()

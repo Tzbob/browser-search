@@ -31,6 +31,16 @@ indexFile = (file, toIndex, callback) ->
 
     callback processed
 
+save = (index, file, callback) ->
+  throw new Error "must pass an object" if index !instanceof Index
+
+  stringified = JSON.stringify index.data, null, 2
+
+  fs.writeFile file, stringified, (err) ->
+    throw err if err?
+
+    callback stringified
+
 index = (raw, toIndex) ->
   throw new Error "must pass an object" if typeof raw != 'object'
 
@@ -59,3 +69,4 @@ index = (raw, toIndex) ->
 
 module.exports.index = index
 module.exports.indexFile = indexFile
+module.exports.save = save
