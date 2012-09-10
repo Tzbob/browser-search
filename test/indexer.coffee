@@ -87,22 +87,22 @@ describe "indexer", ->
   testFile = "./test/articles/benchmarker"
   fileResult =
     benchmarker: [
-      'JF',
-      'BNKSHMRKNK',
-      'SNKLTN',
-      'AN',
-      'ES',
-      'US',
-      'TMNK',
-      'KLS',
-      'PSBL',
-      'IMPRFMNTS',
-      'KRT',
-      'BNKSHMRK',
-      'PRFTR',
-      'SFRL',
-      'UNK',
-      'INSTNSS'
+      "JF",
+      "BNKSHMRKNK",
+      "SNKLTN",
+      "AN",
+      "ES",
+      "US",
+      "TMNK",
+      "KLS",
+      "PSBL",
+      "IMPRFMNTS",
+      "KRT",
+      "BNKSHMRK",
+      "PRFTR",
+      "SFRL",
+      "UNK",
+      "INSTNSS"
     ]
 
   describe "#indexFile()", ->
@@ -128,11 +128,32 @@ describe "indexer", ->
 
   # indexDir()
   # ###########################################################################
-  
+
+  testBenchmarkerPythonConfig =
+    pythonconfig: [ "P0N", "KLBL", "KNFKRXN" ]
+    benchmarker: [
+      "JF",
+      "BNKSHMRKNK",
+      "SNKLTN",
+      "AN",
+      "ES",
+      "US",
+      "TMNK",
+      "KLS",
+      "PSBL",
+      "IMPRFMNTS",
+      "KRT",
+      "BNKSHMRK",
+      "PRFTR",
+      "SFRL",
+      "UNK",
+      "INSTNSS"
+    ]
+ 
   describe "#indexDir()", ->
     it "should process dir", (done) ->
       indexer.indexDir "./test/articles/", ["title", "info"], (contents) ->
-        console.log contents
+        assert.deepEqual testBenchmarkerPythonConfig, contents.data
         done()
  
   # save()
