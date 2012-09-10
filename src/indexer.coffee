@@ -31,6 +31,25 @@ indexFile = (file, toIndex, callback) ->
 
     callback processed
 
+indexDir = (dir, toIndex, callback) ->
+  fs.readdir dir, (err, files) ->
+    throw err if err?
+
+    files = files.filter (file) -> file.match /.json$/
+
+    index = new Index {}
+
+    indexRecursive = (i) ->
+      fullPath = dir+"/"+files[i]
+
+      indexFile fullPath, toIndex, (contents) ->
+        index.extend contents
+        callback index if i >= files.length - 1
+
+      indexRecursive i+1 if i < files.length - 1
+
+    indexRecursive 0
+
 save = (index, file, callback) ->
   throw new Error "must pass an object" if index !instanceof Index
 
@@ -69,4 +88,5 @@ index = (raw, toIndex) ->
 
 module.exports.index = index
 module.exports.indexFile = indexFile
+module.exports.indexDir = indexDir
 module.exports.save = save

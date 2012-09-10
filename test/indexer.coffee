@@ -126,6 +126,15 @@ describe "indexer", ->
         assert.deepEqual contents.query("benchmark"), ["benchmarker"]
         done()
 
+  # indexDir()
+  # ###########################################################################
+  
+  describe "#indexDir()", ->
+    it "should process dir", (done) ->
+      indexer.indexDir "./test/articles/", ["title", "info"], (contents) ->
+        console.log contents
+        done()
+ 
   # save()
   # ###########################################################################
  

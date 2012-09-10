@@ -3,6 +3,12 @@ metaphone = natural.Metaphone
 
 class Index
   constructor: (@data) ->
+
+  extend: (index) ->
+    for key, value of index.data
+      if index.data.hasOwnProperty key
+        @data[key] = value
+
   query: (word) ->
     processedWord = metaphone.process word
     results = []
