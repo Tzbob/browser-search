@@ -4,7 +4,8 @@
   "description": "Server sided indexing, browser sided search",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test/*.coffee"
+    "test": "./node_modules/.bin/cake test"
+    , "prepublish": "./node_modules/.bin/cake build"
   },
   "dependencies": {
     "natural": ">= 0.1.15"

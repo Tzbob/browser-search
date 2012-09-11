@@ -153,7 +153,9 @@ describe "indexer", ->
   describe "#indexDir()", ->
     it "should process dir", (done) ->
       indexer.indexDir "./test/articles/", ["title", "info"], (contents) ->
-        assert.deepEqual testBenchmarkerPythonConfig, contents.data
+        # order is not guaranteed so a direct assert on contents.data may fail
+        for key, value of contents.data
+          assert.deepEqual contents.data[key], testBenchmarkerPythonConfig[key]
         done()
  
   # save()
