@@ -53,7 +53,9 @@ indexDir = (dir, toIndex, callback) ->
 save = (index, file, callback) ->
   throw new Error "must pass an object" if index !instanceof Index
 
-  stringified = JSON.stringify index.data, null, 2
+  stringified = index.stringify true
+
+  file = file+".json" if !file.match /.json$/
 
   fs.writeFile file, stringified, (err) ->
     throw err if err?

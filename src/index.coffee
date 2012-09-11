@@ -19,4 +19,10 @@ class Index
 
     return results
 
+  stringify: (format) ->
+    if !format
+      return JSON.stringify @data
+    else
+      return JSON.stringify @data, null, 2
+
 module.exports = Index

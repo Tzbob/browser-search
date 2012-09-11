@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var program = require("commander")
+
+function list(val) {
+    return val.split(",");
+}
+
+program
+    .usage("[options] dir/to/index")
+    .version(require("../package.json").version)
+    .option("-p, --print, print the compiled javascript")
+    .option("-o, --output [dir], set the output for the index page")
+    .option("-t, --to-index <title, content>, which fields to index", "", list)
+    .parse(process.argv);
+
+require("../lib/browser-indexer").process(program);
