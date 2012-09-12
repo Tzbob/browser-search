@@ -1,5 +1,5 @@
-natural = require "natural"
-metaphone = natural.Metaphone
+{Metaphone} = require "natural"
+metaphone = Metaphone
 
 class Index
   constructor: (@data) ->

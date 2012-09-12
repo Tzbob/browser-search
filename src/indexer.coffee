@@ -1,9 +1,8 @@
-Index = require "./index"
-natural = require "natural"
+{Metaphone} = require "natural"
 fs = require "fs"
+Index = require "./index"
 
-metaphone = natural.Metaphone
-metaphone.attach()
+Metaphone.attach()
 
 removeDuplicates = (array) ->
   output = {}
