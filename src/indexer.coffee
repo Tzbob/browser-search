@@ -16,6 +16,32 @@ removeDuplicates = (array) ->
 
   return (value for key, value of output)
 
+index = (raw, toIndex) ->
+  throw new Error "must pass an object" if typeof raw != 'object'
+
+  results = {}
+
+  for key, object of raw
+
+    # Nothing toIndex -> index object
+    if !toIndex?
+      results[key] = object.tokenizeAndPhoneticize()
+
+    # Multiple toIndex properties -> index all
+    else if toIndex instanceof Array
+      buffer = []
+      for target in toIndex
+        buffer = buffer.concat object[target].tokenizeAndPhoneticize()
+      results[key] = buffer
+
+    # One index property -> index it
+    else
+      results[key] = object[toIndex].tokenizeAndPhoneticize()
+
+    results[key] = removeDuplicates results[key]
+
+  return new Index results
+
 indexFile = (file, toIndex, callback) ->
   file += ".json" if !file.match /.json$/
   fs.readFile file, "utf-8", (err, contents) ->
@@ -59,34 +85,7 @@ save = (index, file, callback) ->
 
   fs.writeFile file, stringified, (err) ->
     throw err if err?
-
     callback stringified
-
-index = (raw, toIndex) ->
-  throw new Error "must pass an object" if typeof raw != 'object'
-
-  results = {}
-
-  for key, object of raw
-
-    # Nothing toIndex -> index object
-    if !toIndex?
-      results[key] = object.tokenizeAndPhoneticize()
-
-    # Multiple toIndex properties -> index all
-    else if toIndex instanceof Array
-      buffer = []
-      for target in toIndex
-        buffer = buffer.concat object[target].tokenizeAndPhoneticize()
-      results[key] = buffer
-
-    # One index property -> index it
-    else
-      results[key] = object[toIndex].tokenizeAndPhoneticize()
-
-    results[key] = removeDuplicates results[key]
-
-  return new Index results
 
 module.exports.index = index
 module.exports.indexFile = indexFile
