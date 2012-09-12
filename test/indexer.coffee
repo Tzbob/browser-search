@@ -38,23 +38,23 @@ describe "indexer", ->
   describe "#index()", ->
     it "should error out on something that isn't an object", ->
       assert.throws ->
-        indexer.index "rawtext"
+        indexer.indexText "rawtext"
 
     it "should return an indexed object", ->
-      test = indexer.index
+      test = indexer.indexText
         one: one
         two: two
       assert.deepEqual test.data, result
 
     it "should return an indexed object without doubles", ->
-      test = indexer.index
+      test = indexer.indexText
         one: doubleOne
         two: two
       assert.deepEqual test.data, result
 
 
     it "should create an indexed object using just one property", ->
-      test = indexer.index
+      test = indexer.indexText
         one:
           text: one
         two:
@@ -63,7 +63,7 @@ describe "indexer", ->
       assert.deepEqual test.data, result
 
     it "should find both documents when searching for This", ->
-      test = indexer.index
+      test = indexer.indexText
         one:
           text: one
         two:
@@ -74,7 +74,7 @@ describe "indexer", ->
       assert.deepEqual result, ["one", "two"]
 
     it "should create an indexed object using multiple properties", ->
-      test = indexer.index
+      test = indexer.indexText
         one:
           textOne: one
           textTwo: two
@@ -161,7 +161,7 @@ describe "indexer", ->
   # save()
   # ###########################################################################
  
-  test = indexer.index
+  test = indexer.indexText
     one: one
     two: two
 

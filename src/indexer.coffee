@@ -16,7 +16,7 @@ removeDuplicates = (array) ->
 
   return (value for key, value of output)
 
-index = (raw, toIndex) ->
+indexText = (raw, toIndex) ->
   throw new Error "must pass an object" if typeof raw != 'object'
 
   results = {}
@@ -53,7 +53,7 @@ indexFile = (file, toIndex, callback) ->
     raw = {}
     raw[filename] = JSON.parse contents
 
-    processed = index raw, toIndex
+    processed = indexText raw, toIndex
 
     callback processed
 
@@ -87,7 +87,7 @@ save = (index, file, callback) ->
     throw err if err?
     callback stringified
 
-module.exports.index = index
+module.exports.indexText = indexText
 module.exports.indexFile = indexFile
 module.exports.indexDir = indexDir
 module.exports.save = save
