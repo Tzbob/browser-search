@@ -17,7 +17,7 @@ removeDuplicates = (array) ->
   return (value for key, value of output)
 
 indexText = (raw, toIndex) ->
-  throw new Error "must pass an object" if typeof raw != 'object'
+  throw new Error "must pass an object" if typeof raw != "object"
 
   results = {}
 
@@ -25,6 +25,14 @@ indexText = (raw, toIndex) ->
 
     # Nothing toIndex -> index object
     if !toIndex?
+      if typeof object != "string"
+        throw new Error """
+          Problem while indexing your data.
+          #{JSON.stringify object, null, 2} 
+          Can not be tokenized because it is not a string.
+          Try providing the keys to-be-indexed.
+        """
+
       results[key] = object.tokenizeAndPhoneticize()
 
     # Multiple toIndex properties -> index all

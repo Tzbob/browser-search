@@ -40,6 +40,12 @@ describe "indexer", ->
       assert.throws ->
         indexer.indexText "rawtext"
 
+    it "should error out on something that is not a proper key/value object", ->
+      assert.throws ->
+        indexer.indexText
+          key:
+            value: test
+
     it "should return an indexed object", ->
       test = indexer.indexText
         one: one
