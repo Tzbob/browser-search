@@ -98,3 +98,4 @@ module.exports.indexText = indexText
 module.exports.indexFile = indexFile
 module.exports.indexDir = indexDir
 module.exports.save = save
+module.exports.Index = Index

@@ -1,5 +1,4 @@
-{Metaphone} = require "natural"
-metaphone = Metaphone
+metaphone = require "natural/lib/natural/phonetics/metaphone"
 
 class Index
   constructor: (@data) ->
