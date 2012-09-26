@@ -1,6 +1,4 @@
 {exec, spawn} = require "child_process"
-#{Codesurgeon} = require "codesurgeon"
-#surgeon = new Codesurgeon
 
 build = (watch) ->
   opts = ["-c", "-o", "lib/", "src/"]
@@ -20,14 +18,6 @@ run = (command) ->
 
 task "build", "Build src/*.coffee to lib/*js", ->
   build false
-
-task "build:index.js", ->
-  surgeon.configure
-    package: "./package.json"
-  .read "lib/index.js"
-  .extract()
-  .clear "inputs"
-  .read ""
 
 task "watch", "Build src/*.coffee to lib/*js", ->
   build true
