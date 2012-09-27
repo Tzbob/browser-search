@@ -1,8 +1,11 @@
 {
   "name": "browser-search",
-  "version": "0.0.0",
+  "version": "0.9",
   "description": "Server sided indexing, browser sided search",
   "main": "lib/indexer.js",
+  "bin": {
+      "browser-indexer": "./bin/browser-indexer"
+  },
   "scripts": {
     "test": "./node_modules/.bin/cake test"
     , "prepublish": "./node_modules/.bin/cake build"
