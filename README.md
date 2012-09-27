@@ -16,9 +16,9 @@
 
     -h, --help                                              output usage information
     -V, --version                                           output the version number
-    -p, --print, print the compiled javascript              
-    -o, --output [dir], set the output for the index page   
-    -t, --to-index <title, content>, which fields to index  
+    -p, --print                                             print the compiled javascript              
+    -o, --output [dir]                                      set the output for the index page   
+    -t, --to-index <title, content>                         which fields to index  
 
 ````
 
