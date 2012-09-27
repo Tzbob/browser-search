@@ -18,6 +18,11 @@ run = (command) ->
 
 task "build", "Build src/*.coffee to lib/*js", ->
   build false
+  invoke "build:browserindex"
+
+task "build:browserindex", "Build src/*.coffee to lib/*js", ->
+  run "browserify ./lib/index.browserwrap.js -o ./build/browserindex.js" +
+      "&& uglifyjs -o ./build/browserindex.min.js ./build/browserindex.js"
 
 task "watch", "Build src/*.coffee to lib/*js", ->
   build true
