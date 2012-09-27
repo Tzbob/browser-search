@@ -1,6 +1,6 @@
 {
   "name": "browser-search",
-  "version": "0.9",
+  "version": "0.9.0",
   "description": "Server sided indexing, browser sided search",
   "main": "lib/indexer.js",
   "bin": {

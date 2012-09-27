@@ -1,6 +1,6 @@
 # Browser-search
 
-## Installation (not yet deployed)
+## Installation 
     $ npm install browser-search
 
 ## Usage
